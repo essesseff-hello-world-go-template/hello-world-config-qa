@@ -1,0 +1,93 @@
+replicaCount: 2
+
+image:
+  registry: ghcr.io
+  repository: essesseff-hello-world-go-template/hello-world-app
+  pullPolicy: IfNotPresent
+  tag: 1.0.0-abc123-20250930T120000Z
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8080"
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: hello-world-qa.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: hello-world-qa-tls
+      hosts:
+        - hello-world-qa.example.com
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 384Mi
+  requests:
+    cpu: 150m
+    memory: 192Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 75
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+env:
+  - name: ENVIRONMENT
+    value: "QA"
+  - name: PORT
+    value: "8080"
+  - name: VERSION
+    value: "1.0.0-abc123-20250930T120000Z"
+
+configMap:
+  enabled: true
+  data:
+    app.config: |
+      environment: qa
+      logLevel: info
+      features:
+        experimental: true
