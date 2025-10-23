@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   registry: ghcr.io
-  repository: essesseff-hello-world-go-template/hello-world-app
+  repository: essesseff-hello-world-go-template/hello-world
   pullPolicy: IfNotPresent
   tag: 1.0.0-abc123-20250930T120000Z
 
