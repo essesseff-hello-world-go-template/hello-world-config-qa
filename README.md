@@ -12,6 +12,3 @@ Helm chart for QA environment.
 ## Updates
 
 This repository is updated by essesseff platform when deployments occur.
-
-All team members can edit this repo (it's just desired state), but actual 
-deployments are controlled by essesseff RBAC.
