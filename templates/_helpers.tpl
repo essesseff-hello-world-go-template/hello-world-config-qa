@@ -1,8 +1,8 @@
-{{- define "hello-world.name" -}}
+{{- define "hello-world-qa.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "hello-world.fullname" -}}
+{{- define "hello-world-qa.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -15,27 +15,27 @@
 {{- end }}
 {{- end }}
 
-{{- define "hello-world.chart" -}}
+{{- define "hello-world-qa.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "hello-world.labels" -}}
-helm.sh/chart: {{ include "hello-world.chart" . }}
-{{ include "hello-world.selectorLabels" . }}
+{{- define "hello-world-qa.labels" -}}
+helm.sh/chart: {{ include "hello-world-qa.chart" . }}
+{{ include "hello-world-qa.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{- define "hello-world.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "hello-world.name" . }}
+{{- define "hello-world-qa.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "hello-world-qa.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{- define "hello-world.serviceAccountName" -}}
+{{- define "hello-world-qa.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "hello-world.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "hello-world-qa.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
