@@ -6,8 +6,8 @@ Helm chart for QA environment.
 
 - **Environment**: QA
 - **Auto-Deploy**: No (manual via essesseff)
-- **Namespace**: `qa`
-- **Ingress**: `hello-world-qa.example.com`
+- **Namespace**: `essesseff-hello-world-go-template`
+- **Ingress**: `example.com/hello-world-qa`
 
 ## Updates
 
