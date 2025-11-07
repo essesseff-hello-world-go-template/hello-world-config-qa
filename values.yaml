@@ -3,7 +3,7 @@ replicaCount: 2
 image:
   registry: ghcr.io
   repository: essesseff-hello-world-go-template/hello-world
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   tag: 1.0.0-abc123-20250930T120000Z
 
 imagePullSecrets: []
@@ -77,16 +77,16 @@ ingress:
 
 resources:
   limits:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 300m
+    memory: 384Mi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 150m
+    memory: 192Mi
 
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 3
+  minReplicas: 2
+  maxReplicas: 6
   targetCPUUtilizationPercentage: 75
 
 livenessProbe:
@@ -105,7 +105,7 @@ readinessProbe:
 
 env:
   - name: ENVIRONMENT
-    value: "DEV"
+    value: "QA"
   - name: PORT
     value: "8080"
   - name: VERSION
@@ -116,6 +116,6 @@ configMap:
   data:
     app.config: |
       environment: qa
-      logLevel: debug
+      logLevel: info
       features:
         experimental: true
