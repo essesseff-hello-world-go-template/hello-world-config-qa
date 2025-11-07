@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "hello-world-qa.fullname" . }}
+  name: {{ include "app.fullname" . }}
   labels:
-    {{- include "hello-world-qa.labels" . | nindent 4 }}
+    {{- include "app.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.targetPort }}  # Fixed: Use value from values.yaml instead of hardcoded "http"
       protocol: TCP
       name: http
   selector:
-    {{- include "hello-world-qa.selectorLabels" . | nindent 4 }}
+    {{- include "app.selectorLabels" . | nindent 4 }}
