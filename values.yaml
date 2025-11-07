@@ -44,7 +44,7 @@ ingress:
     
     # Group all environments into one ALB (cost-efficient)
     alb.ingress.kubernetes.io/group.name: hello-world
-    alb.ingress.kubernetes.io/group.order: '1'  # Increment for each env (1=dev, 2=qa, 3=staging, 4=prod)
+    alb.ingress.kubernetes.io/group.order: '2'  # Increment for each env (1=dev, 2=qa, 3=staging, 4=prod)
     
     # Health checks
     alb.ingress.kubernetes.io/healthcheck-path: /health
