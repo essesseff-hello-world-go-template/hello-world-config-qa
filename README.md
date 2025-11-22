@@ -1,4 +1,4 @@
-# Hello World Config - QA
+# hello-world Config - QA
 
 Helm chart for QA environment.
 
