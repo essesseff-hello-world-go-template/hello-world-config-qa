@@ -33,7 +33,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "app.fullname" . }}
+                name: {{ include "app.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
